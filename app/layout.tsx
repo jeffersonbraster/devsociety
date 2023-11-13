@@ -1,15 +1,29 @@
 import React from "react";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+// eslint-disable-next-line camelcase
+import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  variable: "--font-inter",
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-spaceGrotesk",
+});
 
 export const metadata: Metadata = {
-  title: "Dev Society",
+  title: "DevSociety",
   description:
-    "Sociedade de todos os desenvolvedores e entusiastas de tecnologia.",
+    "Plataforma de colaboração entre desenvolvedores e entusiastas de tecnologia. Explore topicos sobre tecnologia, tire suas duvidas e compartilhe conhecimento.",
+  icons: {
+    icon: "/assets/images/site-logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -18,9 +32,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
+    <ClerkProvider
+      appearance={{
+        elements: {
+          formButtonPrimary: "primary-gradient",
+          footerActionLink: "primary-text-gradient hover:text-primary-500",
+        },
+      }}
+    >
       <html lang="pt-br">
-        <body className={inter.className}>{children}</body>
+        <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+          {children}
+        </body>
       </html>
     </ClerkProvider>
   );
