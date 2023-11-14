@@ -77,8 +77,11 @@ const MobileNav = () => {
             alt="DevFlow"
           />
 
-          <p className="h2-bold text-dark100_light900 font-spaceGrotesk">
-            Dev <span className="text-primary-500">Overflow</span>
+          <p className="h2-bold text-primary-500 ">
+            Dev{" "}
+            <span className="text-dark100_light900 font-spaceGrotesk">
+              Society
+            </span>
           </p>
         </Link>
         <div>
