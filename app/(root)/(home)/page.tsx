@@ -1,3 +1,4 @@
+import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
@@ -16,7 +17,13 @@ const Home = () => {
       </div>
 
       <div className="mt-11 flex justify-between gap-5 max-sm:flex-col sm:items-center">
-        localsearchbar filters
+        <LocalSearchbar
+          route="/"
+          iconPosition="left"
+          imgSrc="/assets/icons/search.svg"
+          placeholder="Pesquisar por perguntas"
+          otherClasses="flex-1"
+        />
       </div>
     </>
   );
