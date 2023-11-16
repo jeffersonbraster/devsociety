@@ -4,25 +4,25 @@ import React from "react";
 import RenderTag from "./RenderTag";
 
 const hotQuestions = [
-  { _id: 1, title: "Como entrar para o time do meu lider Rhuanzito" },
-  { _id: 2, title: "Como ser um bom dev no g1?" },
-  { _id: 3, title: "Como colocar uma div no centro da tela?" },
+  { _id: "1", title: "Como entrar para o time do meu lider Rhuanzito" },
+  { _id: "2", title: "Como ser um bom dev no g1?" },
+  { _id: "3", title: "Como colocar uma div no centro da tela?" },
   {
-    _id: 4,
+    _id: "4",
     title: "Porque a programação vai me matar um dia?",
   },
   {
-    _id: 5,
+    _id: "5",
     title: "Nextjs é o maior e melhor framework que existe e só chorem, ok?",
   },
 ];
 
 const popularTags = [
-  { _id: 1, name: "javascript", totalQuestions: 5 },
-  { _id: 2, name: "react", totalQuestions: 5 },
-  { _id: 3, name: "next", totalQuestions: 5 },
-  { _id: 4, name: "vue", totalQuestions: 2 },
-  { _id: 5, name: "redux", totalQuestions: 10 },
+  { _id: "1", name: "javascript", totalQuestions: 5 },
+  { _id: "2", name: "react", totalQuestions: 5 },
+  { _id: "3", name: "next", totalQuestions: 5 },
+  { _id: "4", name: "vue", totalQuestions: 2 },
+  { _id: "5", name: "redux", totalQuestions: 10 },
 ];
 
 const RightSidebar = () => {
