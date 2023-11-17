@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import FroalaEditor from "react-froala-wysiwyg";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -17,6 +16,10 @@ import {
 import { QuestionsSchema } from "@/lib/validations";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Badge } from "../ui/badge";
+import Image from "next/image";
+
+import FroalaEditor from "react-froala-wysiwyg";
 
 import "froala-editor/css/froala_editor.pkgd.min.css";
 import "froala-editor/js/plugins/image.min.js";
@@ -26,8 +29,7 @@ import "froala-editor/js/plugins/emoticons.min.js";
 import "froala-editor/js/plugins/markdown.min.js";
 import "froala-editor/js/plugins/lists.min.js";
 import "froala-editor/js/plugins/font_size.min.js";
-import { Badge } from "../ui/badge";
-import Image from "next/image";
+import { createQuestion } from "@/lib/actions/question.action";
 
 const type: any = "create";
 
@@ -78,10 +80,11 @@ const Question = () => {
     form.setValue("tags", newTags);
   };
 
-  function onSubmit(values: z.infer<typeof QuestionsSchema>) {
+  async function onSubmit(values: z.infer<typeof QuestionsSchema>) {
     setIsSubmitting(true);
 
     try {
+      await createQuestion({});
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -136,6 +139,8 @@ const Question = () => {
                   config={{
                     height: 300,
                   }}
+                  model={field.value}
+                  onModelChange={(content: any) => field.onChange(content)}
                 />
               </FormControl>
 
