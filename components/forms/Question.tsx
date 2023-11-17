@@ -1,6 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import { Editor } from "@tinymce/tinymce-react";
+import { usePathname, useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -19,22 +21,20 @@ import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
 import Image from "next/image";
 
-import FroalaEditor from "react-froala-wysiwyg";
-
-import "froala-editor/css/froala_editor.pkgd.min.css";
-import "froala-editor/js/plugins/image.min.js";
-import "froala-editor/js/plugins/code_beautifier.min.js";
-import "froala-editor/js/plugins/code_view.min.js";
-import "froala-editor/js/plugins/emoticons.min.js";
-import "froala-editor/js/plugins/markdown.min.js";
-import "froala-editor/js/plugins/lists.min.js";
-import "froala-editor/js/plugins/font_size.min.js";
 import { createQuestion } from "@/lib/actions/question.action";
+
+interface QuestionProps {
+  mongoUserId: string;
+}
 
 const type: any = "create";
 
-const Question = () => {
+const Question = ({ mongoUserId }: QuestionProps) => {
+  const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const router = useRouter();
+  const pathName = usePathname();
 
   const form = useForm<z.infer<typeof QuestionsSchema>>({
     resolver: zodResolver(QuestionsSchema),
@@ -84,7 +84,14 @@ const Question = () => {
     setIsSubmitting(true);
 
     try {
-      await createQuestion({});
+      await createQuestion({
+        title: values.title,
+        content: values.explanation,
+        tags: values.tags,
+        author: JSON.parse(mongoUserId),
+      });
+
+      router.push("/");
     } catch (error) {
     } finally {
       setIsSubmitting(false);
@@ -134,13 +141,41 @@ const Question = () => {
               </FormLabel>
 
               <FormControl className="mt-3.5">
-                <FroalaEditor
-                  tag="textarea"
-                  config={{
-                    height: 300,
+                <Editor
+                  apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
+                  onInit={(evt, editor) => {
+                    // @ts-ignore
+                    editorRef.current = editor;
                   }}
-                  model={field.value}
-                  onModelChange={(content: any) => field.onChange(content)}
+                  onBlur={field.onBlur}
+                  onEditorChange={(content) => field.onChange(content)}
+                  initialValue=""
+                  init={{
+                    height: 350,
+                    menubar: false,
+                    plugins: [
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "codesample",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                    ],
+                    toolbar:
+                      "undo redo | " +
+                      "codesample | bold italic forecolor | alignleft aligncenter |" +
+                      "alignright alignjustify | bullist numlist",
+                    content_style: "body { font-family:Inter; font-size:16px }",
+                  }}
                 />
               </FormControl>
 
