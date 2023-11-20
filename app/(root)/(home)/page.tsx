@@ -1,3 +1,4 @@
+import Link from "next/link";
 import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
@@ -6,12 +7,9 @@ import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
 import { HomePageFilters } from "@/constants/filters";
 import { getQuestions } from "@/lib/actions/question.action";
-import Link from "next/link";
-import React from "react";
-
 
 const Home = async () => {
-  const result = await getQuestions({})
+  const result = await getQuestions({});
 
   return (
     <>

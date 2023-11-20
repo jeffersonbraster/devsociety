@@ -8,6 +8,7 @@ import {
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
 import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.actions";
+import { toggleSaveQuestion } from "@/lib/actions/user.action";
 
 interface VotesProps {
   type: string;
@@ -31,8 +32,14 @@ const Votes = ({
   hasSaved,
 }: VotesProps) => {
   const pathName = usePathname();
-  const router = useRouter();
-  const handleSave = () => {};
+  // const router = useRouter();
+  const handleSave = async () => {
+    await toggleSaveQuestion({
+      userId: JSON.parse(userId),
+      questionId: JSON.parse(itemId),
+      path: pathName,
+    });
+  };
 
   const handleVote = async (action: string) => {
     if (!userId) return;
