@@ -5,3 +5,7 @@ export const QuestionsSchema = z.object({
   explanation: z.string().min(50, "Minimo 50 caracteres"),
   tags: z.array(z.string().min(1).max(15)).min(1, "Minimo 1 tag").max(3, "Maximo 3 tags"),
 });
+
+export const AnswerSchema = z.object({
+  answer: z.string().min(100, "Minimo 10 caracteres"),
+});
