@@ -10,6 +10,8 @@ import RenderTag from "@/components/shared/RenderTag";
 import Answer from "@/components/forms/Answer";
 import { auth } from "@clerk/nextjs";
 import { getUserById } from "@/lib/actions/user.action";
+import AllAnswers from "@/components/shared/AllAnswers";
+import Votes from "@/components/shared/Votes";
 
 interface QuestionProps {
   params: {
@@ -18,7 +20,6 @@ interface QuestionProps {
 }
 
 const Question = async ({ params }: QuestionProps) => {
-  const result = await getQuestionById({ questionId: params.id });
   const { userId: clerkId } = auth();
 
   let mongoUser;
@@ -26,6 +27,8 @@ const Question = async ({ params }: QuestionProps) => {
   if (clerkId) {
     mongoUser = await getUserById({ userId: clerkId });
   }
+
+  const result = await getQuestionById({ questionId: params.id });
 
   return (
     <>
@@ -48,7 +51,9 @@ const Question = async ({ params }: QuestionProps) => {
             </p>
           </Link>
 
-          <div className="flex justify-end">VOTING</div>
+          <div className="flex justify-end">
+            <Votes />
+          </div>
         </div>
 
         <h2 className="h2-semibold text-dark200_light900 mt-3.5 w-full text-left">
@@ -97,6 +102,12 @@ const Question = async ({ params }: QuestionProps) => {
           />
         ))}
       </div>
+
+      <AllAnswers
+        questionId={result._id}
+        userId={JSON.stringify(mongoUser._id)}
+        totalAnswers={result.answers.length}
+      />
 
       <Answer
         question={result.content}
