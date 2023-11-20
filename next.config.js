@@ -4,7 +4,6 @@ const nextConfig = {
     mdxRs: true,
     serverComponentsExternalPackages: ["mongoose"],
   },
-
   images: {
     remotePatterns: [
       {
