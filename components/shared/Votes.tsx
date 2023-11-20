@@ -7,6 +7,7 @@ import {
 } from "@/lib/actions/question.action";
 import { formatAndDivideNumber } from "@/lib/utils";
 import Image from "next/image";
+import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.actions";
 
 interface VotesProps {
   type: string;
@@ -46,13 +47,13 @@ const Votes = ({
           path: pathName,
         });
       } else if (type === "Answer") {
-        // await upvoteAswer({
-        //   questionId: JSON.parse(itemId),
-        //   userId: JSON.parse(userId),
-        //   hasupVoted,
-        //   hasdownVoted,
-        //   path: pathName,
-        // });
+        await upvoteAnswer({
+          answerId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathName,
+        });
       }
     }
 
@@ -66,13 +67,13 @@ const Votes = ({
           path: pathName,
         });
       } else if (type === "Answer") {
-        // await downvoteAswer({
-        //   questionId: JSON.parse(itemId),
-        //   userId: JSON.parse(userId),
-        //   hasupVoted,
-        //   hasdownVoted,
-        //   path: pathName,
-        // });
+        await downvoteAnswer({
+          answerId: JSON.parse(itemId),
+          userId: JSON.parse(userId),
+          hasupVoted,
+          hasdownVoted,
+          path: pathName,
+        });
       }
     }
   };
@@ -123,18 +124,20 @@ const Votes = ({
         </div>
       </div>
 
-      <Image
-        src={
-          hasSaved
-            ? "/assets/icons/star-filled.svg"
-            : "/assets/icons/star-red.svg"
-        }
-        width={18}
-        height={18}
-        alt="favorito icon"
-        className="cursor-pointer"
-        onClick={handleSave}
-      />
+      {type === "Question" && (
+        <Image
+          src={
+            hasSaved
+              ? "/assets/icons/star-filled.svg"
+              : "/assets/icons/star-red.svg"
+          }
+          width={18}
+          height={18}
+          alt="favorito icon"
+          className="cursor-pointer"
+          onClick={handleSave}
+        />
+      )}
     </div>
   );
 };

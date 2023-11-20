@@ -114,7 +114,7 @@ const Question = async ({ params }: QuestionProps) => {
 
       <AllAnswers
         questionId={result._id}
-        userId={JSON.stringify(mongoUser._id)}
+        userId={mongoUser._id}
         totalAnswers={result.answers.length}
       />
 
