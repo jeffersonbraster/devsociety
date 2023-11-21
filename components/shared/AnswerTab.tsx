@@ -1,6 +1,13 @@
-import React from "react";
+import { getUserQuestions } from "@/lib/actions/user.action";
+import { SearchParamsProps } from "@/types";
+import QuestionCard from "../cards/QuestionCard";
 
-const AnswerTab = () => {
+interface AnswerTabProps extends SearchParamsProps {
+  userId: string;
+  clerkId?: string | null;
+}
+
+const AnswerTab = ({ searchParams, userId, clerkId }: AnswerTabProps) => {
   return <div>AnswerTab</div>;
 };
 

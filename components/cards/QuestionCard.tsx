@@ -8,6 +8,7 @@ import { formatAndDivideNumber } from "@/lib/utils";
 interface QuestionCardProps {
   _id: string;
   title: string;
+  clerkId?: string | undefined | null;
   tags: { _id: string; name: string }[];
   author: {
     _id: string;
@@ -23,6 +24,7 @@ interface QuestionCardProps {
 const QuestionCard = ({
   _id,
   title,
+  clerkId,
   tags,
   author,
   upvotes,
