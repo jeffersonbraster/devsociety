@@ -1,14 +1,24 @@
-import { getUserQuestions } from "@/lib/actions/user.action";
+import { getUserAnswers } from "@/lib/actions/user.action";
+
 import { SearchParamsProps } from "@/types";
-import QuestionCard from "../cards/QuestionCard";
+import AnswerCard from "../cards/AnswerCard";
 
 interface AnswerTabProps extends SearchParamsProps {
   userId: string;
   clerkId?: string | null;
 }
 
-const AnswerTab = ({ searchParams, userId, clerkId }: AnswerTabProps) => {
-  return <div>AnswerTab</div>;
+const AnswerTab = async ({ searchParams, userId, clerkId }: AnswerTabProps) => {
+  const result = await getUserAnswers({
+    userId,
+    page: 1
+  })
+
+  return <>
+    {result.answers.map((item) => (
+      <AnswerCard key={item._id} clerkId={clerkId} _id={item._id} question={item.question} author={item.author} upvotes={item.upvotes.length} createdAt={item.createdAt} />
+    ))}
+  </>;
 };
 
 export default AnswerTab;
