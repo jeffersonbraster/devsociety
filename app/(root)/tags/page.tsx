@@ -1,9 +1,9 @@
 import Link from "next/link";
+import { getAllTags } from "@/lib/actions/tag.actions";
 import Filter from "@/components/shared/Filter";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { UserFilters } from "@/constants/filters";
 import NoResult from "@/components/shared/NoResult";
-import { getAllTags } from "@/lib/actions/tag.actions";
 
 const Tags = async () => {
   const result = await getAllTags({});

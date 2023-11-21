@@ -1,9 +1,8 @@
 import Link from "next/link";
-import React from "react";
-import RenderTag from "../shared/RenderTag";
-import Metric from "../shared/Metric";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
+import RenderTag from "../shared/RenderTag";
+import Metric from "../shared/Metric";
 import { formatAndDivideNumber } from "@/lib/utils";
 
 interface QuestionCardProps {

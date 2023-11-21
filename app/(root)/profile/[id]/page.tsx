@@ -1,16 +1,16 @@
+import Image from "next/image";
+import Link from "next/link";
+import { SignedIn, auth } from "@clerk/nextjs";
 import { format } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { getUserInfo } from "@/lib/actions/user.action";
-import { URLProps } from "@/types";
-import { SignedIn, auth } from "@clerk/nextjs";
-import Image from "next/image";
-import Link from "next/link";
 import ProfileLink from "@/components/shared/ProfileLink";
 import Stats from "@/components/shared/Stats";
 import AnswerTab from "@/components/shared/AnswerTab";
 import QuestionTab from "@/components/shared/QuestionTab";
+import { getUserInfo } from "@/lib/actions/user.action";
+import { URLProps } from "@/types";
 
 const Profile = async ({ params, searchParams }: URLProps) => {
   const { userId: clerkId } = auth();

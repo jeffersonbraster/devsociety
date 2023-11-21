@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -7,7 +8,7 @@ import {
   upvoteQuestion,
 } from "@/lib/actions/question.action";
 import { formatAndDivideNumber } from "@/lib/utils";
-import Image from "next/image";
+
 import { downvoteAnswer, upvoteAnswer } from "@/lib/actions/answer.actions";
 import { toggleSaveQuestion } from "@/lib/actions/user.action";
 import { viewQuestion } from "@/lib/actions/interaction.actions";

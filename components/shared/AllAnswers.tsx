@@ -1,12 +1,10 @@
-import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { formatDistanceToNow } from "date-fns";
+import { ptBR } from "date-fns/locale";
 import Filter from "./Filter";
 import { AnswerFilters } from "@/constants/filters";
 import { getAnswers } from "@/lib/actions/answer.actions";
-
-import { formatDistanceToNow } from "date-fns";
-import { ptBR } from "date-fns/locale";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
 
