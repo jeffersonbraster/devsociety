@@ -30,7 +30,7 @@ interface QuestionProps {
   mongoUserId: string;
 }
 
-const Question = ({ type, questionDetails, mongoUserId }: QuestionProps) => {
+const Question = ({ type, mongoUserId, questionDetails }: QuestionProps) => {
   const { mode } = useTheme();
   const editorRef = useRef(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +38,9 @@ const Question = ({ type, questionDetails, mongoUserId }: QuestionProps) => {
   const router = useRouter();
   const pathName = usePathname();
 
-  const parsedQuestionDetails = JSON.parse(questionDetails || "");
+  const parsedQuestionDetails = questionDetails
+    ? JSON.parse(questionDetails)
+    : "";
 
   const groupedTags = parsedQuestionDetails.tags?.map((tag) => tag.name);
 
