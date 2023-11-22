@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { HomePageFilters } from "@/constants/filters";
 import { Button } from "../ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
