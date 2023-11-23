@@ -5,8 +5,8 @@ import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { QuestionFilters } from "@/constants/filters";
 import { getSavedQuestions } from "@/lib/actions/user.action";
-import { IQuestion } from "@/database/question.model";
 import { SearchParamsProps } from "@/types";
+import Pagination from "@/components/shared/Pagination";
 
 const Collection = async ({ searchParams }: SearchParamsProps) => {
   const { userId } = auth();
@@ -17,6 +17,7 @@ const Collection = async ({ searchParams }: SearchParamsProps) => {
     clerkId: userId,
     searchQuery: searchParams.q,
     filter: searchParams.filter,
+    page: searchParams.page ? +searchParams.page : 1,
   });
 
   return (
@@ -41,7 +42,7 @@ const Collection = async ({ searchParams }: SearchParamsProps) => {
       </div>
       <div className="mt-10 flex w-full flex-col gap-6">
         {result.questions.length > 0 ? (
-          result.questions.map((question: IQuestion) => (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
@@ -62,6 +63,13 @@ const Collection = async ({ searchParams }: SearchParamsProps) => {
             linkTitle="Todas as Perguntas"
           />
         )}
+      </div>
+
+      <div className="mt-10">
+        <Pagination
+          pageNumber={searchParams?.page ? +searchParams.page : 1}
+          isNext={result.isNext}
+        />
       </div>
     </>
   );

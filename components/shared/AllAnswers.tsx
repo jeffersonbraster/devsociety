@@ -7,6 +7,7 @@ import { AnswerFilters } from "@/constants/filters";
 import { getAnswers } from "@/lib/actions/answer.actions";
 import ParseHTML from "./ParseHTML";
 import Votes from "./Votes";
+import Pagination from "./Pagination";
 
 interface AllAnswersProps {
   questionId: string;
@@ -88,6 +89,10 @@ const AllAnswers = async ({
             <ParseHTML data={answer.content} />
           </article>
         ))}
+      </div>
+
+      <div className="mt-10 w-full">
+        <Pagination pageNumber={page ? +page : 1} isNext={result.isNext} />
       </div>
     </div>
   );
