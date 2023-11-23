@@ -42,7 +42,7 @@ const Pagination = ({ pageNumber, isNext }: PaginationProps) => {
 
       <Button
         disabled={!isNext}
-        onClick={() => handleNavigation("prev")}
+        onClick={() => handleNavigation("next")}
         className="light-border-2 btn flex min-h-[36px] items-center justify-center gap-2 border"
       >
         <p className="body-medium text-dark200_light800">Próximo</p>
