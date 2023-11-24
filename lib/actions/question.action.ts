@@ -88,6 +88,14 @@ export async function createQuestion(params: CreateQuestionParams) {
 
     await Question.findByIdAndUpdate(question._id, { $push: { tags: { $each: tagDocuments } } })
 
+    await Interaction.create({
+      user: author,
+      action: "ask_question",
+      question: question._id,
+      tags: tagDocuments,
+    })
+
+    await User.findByIdAndUpdate(author, { $inc: { reputation: 5 } })
 
     revalidatePath(path)
   } catch (error) {
@@ -132,6 +140,10 @@ export async function upvoteQuestion(params: QuestionVoteParams) {
     const question = await Question.findByIdAndUpdate(questionId, updateQuery, { new: true })
 
     if (!question) throw new Error('Question not found')
+
+    await User.findByIdAndUpdate(userId, { $inc: { reputation: hasupVoted ? -1 : 1 } })
+
+    await User.findByIdAndUpdate(question.author, { $inc: { reputation: hasupVoted ? -10 : 10 } })
 
     revalidatePath(path)
   } catch (error) {
